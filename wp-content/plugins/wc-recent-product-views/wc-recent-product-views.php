@@ -31,14 +31,39 @@ define('WRPV_URI', plugin_dir_url((__FILE__)));
 // echo "<br/>";
 // echo WRPV_URI;
 
+
+// var_dump(WRPV_PATH."views\admin\setting_page.php");
+
 // check woocommerce plugin activation
 if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     if(class_exists('WRPV_core')) {
         class WRPV_core {
             public function __construct()
             {
-                // do code
+                /**
+                 * file includes
+                 */
+                require(WRPV_PATH."views/admin/setting_page.php");
+                require(WRPV_PATH."/includes/activation.php");
+
+                /**
+                 * includes classes
+                 */
+                require(WRPV_PATH."/classes/Wrpv_setting_page.php");
+
+                 /**
+                  * Hooks
+                  */
+                  register_activation_hook( __FILE__, 'rvps_activation' ); //wrpv_activation is the callback function
+
+                  add_action('admin_menu', array(new wrpv_setting_page(), 'wrpv_create_setting_page'));
+
+
+                  /**
+                   * Shortcodes
+                   */
             }
         }
+        $WRPV_core = new WRPV_core();
     }
 }
