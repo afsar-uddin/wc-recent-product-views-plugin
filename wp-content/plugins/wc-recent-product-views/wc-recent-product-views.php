@@ -24,19 +24,21 @@ if(version_compare(get_bloginfo('version'), '4.0', '<')) {
 
 
 // constants
-define('WRPV_PATH', plugin_dir_path((__FILE__)));
-define('WRPV_URI', plugin_dir_url((__FILE__)));
+define('WRPV_PATH', plugin_dir_path(__FILE__));
+define('WRPV_URI', plugin_dir_url(__FILE__));
 
 // echo WRPV_PATH;
 // echo "<br/>";
 // echo WRPV_URI;
 
 
-// var_dump(WRPV_PATH."views\admin\setting_page.php");
+// var_dump(WRPV_PATH.'includes/activation.php');
 
 // check woocommerce plugin activation
-if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-    if(class_exists('WRPV_core')) {
+// if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+    if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+        
+    if(!class_exists('WRPV_core')) {
         class WRPV_core {
             public function __construct()
             {
@@ -44,19 +46,20 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
                  * file includes
                  */
                 require(WRPV_PATH."views/admin/setting_page.php");
-                require(WRPV_PATH."/includes/activation.php");
+                require(WRPV_PATH."includes/activation.php");
 
                 /**
                  * includes classes
                  */
-                require(WRPV_PATH."/classes/Wrpv_setting_page.php");
+                require(WRPV_PATH."classes/Wrpv_setting_page.php");
 
                  /**
                   * Hooks
                   */
-                  register_activation_hook( __FILE__, 'rvps_activation' ); //wrpv_activation is the callback function
+                  register_activation_hook( __FILE__, 'wrpv_activation' ); //wrpv_activation is the callback function
 
                   add_action('admin_menu', array(new wrpv_setting_page(), 'wrpv_create_setting_page'));
+
 
 
                   /**

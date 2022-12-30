@@ -1,0 +1,2 @@
+<?php 
+#Silinece is golden!!! 
