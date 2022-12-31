@@ -53,11 +53,16 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
                  */
                 require(WRPV_PATH."classes/Wrpv_setting_page.php");
                 require(WRPV_PATH."classes/Wrpv_save_settings.php");
+                require(WRPV_PATH."classes/Wrpv.php");
 
                  /**
                   * Hooks
                   */
                   register_activation_hook( __FILE__, 'wrpv_activation' ); //wrpv_activation is the callback function
+
+                  add_action('init', array(new Wrpv(), 'wrpv_start_session'), 10);
+                  add_action('init', array(new Wrpv(), 'wrpv_init_session'), 15);
+                  add_action('wp', array(new Wrpv(), 'wrpv_update_product'));
 
                   add_action('admin_menu', array(new wrpv_setting_page(), 'wrpv_create_setting_page'));
                   add_action('admin_post_wrpv_save_settings_field', array(new Wrpv_save_settings(), 'wrpv_save_admin_field_settings'));
@@ -72,3 +77,11 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
         $WRPV_core = new WRPV_core();
     }
 }
+
+
+function wrpv_test() {
+    $wrpv = new Wrpv();
+    var_dump($wrpv->wrpv_get_products());
+}
+
+add_action('wp_footer', 'wrpv_test');
