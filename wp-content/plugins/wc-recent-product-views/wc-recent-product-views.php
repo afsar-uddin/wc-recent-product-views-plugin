@@ -52,6 +52,7 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
                  * includes classes
                  */
                 require(WRPV_PATH."classes/Wrpv_setting_page.php");
+                require(WRPV_PATH."classes/Wrpv_save_settings.php");
 
                  /**
                   * Hooks
@@ -59,6 +60,7 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
                   register_activation_hook( __FILE__, 'wrpv_activation' ); //wrpv_activation is the callback function
 
                   add_action('admin_menu', array(new wrpv_setting_page(), 'wrpv_create_setting_page'));
+                  add_action('admin_post_wrpv_save_settings_field', array(new Wrpv_save_settings(), 'wrpv_save_admin_field_settings'));
 
 
 
