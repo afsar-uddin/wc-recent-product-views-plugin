@@ -46,6 +46,7 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
                  * file includes
                  */
                 require(WRPV_PATH."views/admin/setting_page.php");
+                require(WRPV_PATH."views/front-end/wrpv_view_products.php");
                 require(WRPV_PATH."includes/activation.php");
 
                 /**
@@ -80,8 +81,7 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
 
 
 function wrpv_test() {
-    $wrpv = new Wrpv();
-    var_dump($wrpv->wrpv_get_products());
+    wrpv_view_products();
 }
 
 add_action('wp_footer', 'wrpv_test');
