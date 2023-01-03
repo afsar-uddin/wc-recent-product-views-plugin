@@ -72,6 +72,8 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
                   add_action('woocommerce_after_single_product_summary', array(new Wrpv_view(), 'wrpv_show_after_related_products'), 21);
                 //   woocommerce_after_single_product_summary
                   add_action('woocommerce_after_single_product_summary', array(new Wrpv_view(), 'wrpv_show_before_related_products'), 19);
+                  add_action('woocommerce_after_shop_loop', array(new Wrpv_view(), 'wrpv_show_in_shop_page'), 15);
+                  add_action('woocommerce_cart_collaterals', array(new Wrpv_view(), 'wrpv_show_in_cart_page'), 20);
 
 
 
