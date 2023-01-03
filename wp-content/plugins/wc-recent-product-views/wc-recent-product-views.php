@@ -48,6 +48,7 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
                 require(WRPV_PATH."views/admin/setting_page.php");
                 require(WRPV_PATH."views/front-end/wrpv_view_products.php");
                 require(WRPV_PATH."includes/activation.php");
+                require(WRPV_PATH."shortcodes/wrpv_shortcode.php");
 
                 /**
                  * includes classes
@@ -80,6 +81,7 @@ define('WRPV_URI', plugin_dir_url(__FILE__));
                   /**
                    * Shortcodes
                    */
+                  add_shortcode('wrpv', 'wrpv_shortcode');
             }
         }
         $WRPV_core = new WRPV_core();
